@@ -31,8 +31,8 @@ int bfs(T vertex, Graph<T> graph, int limit){
         for (T elem: graph.getNeighbours(curr)){
             typename set<T> :: iterator it = visited.find(elem);
 
-            //if the neighbours of the current node have been visitted then dont add to queue
-            if (graph.getVisited(vertex) != limit && graph.getValue(vertex) <= limit){
+            //if the neighbours of the current node have been visited then don't add to queue
+            if (graph.getVisited(elem) != limit && graph.getValue(elem) <= limit){
                     if (it == visited.end()){
                         myQueue.push(elem);
                     }

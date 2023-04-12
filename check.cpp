@@ -15,7 +15,6 @@ bool check(int limit, Graph<T> graph, int required)
             }
 
     }
-
     return (found >= required);
 }
 
