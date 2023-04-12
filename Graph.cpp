@@ -68,13 +68,13 @@ template <class T>
 inline ostream& operator<<(ostream& out, const Graph<T>& H){
     out << "{\n";
     for (typename map<T, set<T>>::const_iterator it = H.adj_list.begin(), end = H.adj_list.end(); it != end;++it){
-        out << to_string(it->first) + " : ";
+        out << to_string(it->first.first) + to_string(it->first.second) + " : ";
         for (typename set<T>::const_iterator lit = it->second.begin(), lend = it->second.end(); lit!= lend; ++lit){
             if (distance(next(lit), lend) == 0){
-                out << to_string(*lit);
+                out << to_string(lit->first) + to_string(lit->second);
             }
             else{
-                out << to_string(*lit) + ", ";
+                out << to_string(lit->first) + to_string(lit->second) + ", ";
             }
         }
         out << "\n";

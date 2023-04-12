@@ -6,40 +6,56 @@
 
 using namespace std;
 
+const int inf = 1000001000;
+typedef std::pair<int, int> pii;
 
 
-int main(){
-    //initialize graph
-    Graph<int> graph1;
+Graph<pair<int, int>> generateGraphFromLattice(int size, vector<vector<int>> data)
+{
+    Graph<pair<int, int>> graph;
 
-    //create simple tree
-    //          1
-    //        /   \
-    //       2     3
-    //      / \   / \
-    //     4   5 6   7
-    set<int> connections1 = {2, 3, 4, 5};
-    set<int> connections2 = {6, 7};
-    set<int> connections3 = {8, 9};
-    set<int> connections4 = {10, 11};
-    set<int> connections5 = {12, 13};
+    const int offsetX[] = {-1, 0, 0, 1};
+    const int offsetY[] = {0, 1, -1, 0};
 
-    graph1.addVertex(1, connections1, 10);
-    graph1.addVertex(2, connections2, 2);
-    graph1.addVertex(3, connections3, 5);
-    graph1.addVertex(4, connections4, 5);
-    graph1.addVertex(5, connections5, 1);
+    for (int x = 0; x < size; x++) {
+        for (int y = 0; y < size; y++) {
+            for (int shift = 0; shift < 4; ++shift) {
+                int posY = y + offsetY[shift];
+                int posX = x + offsetX[shift];
+                if (posY >= 0 && posX >= 0 && posY < size && posX < size) {
+                        graph.addVertex(pair(x, y), {pair(posX, posY)}, data[x][y]);
+                    }
+                }
+            }
+    }
 
 
-    // perfrom BFS
+    return graph;
+}
 
 
-    int minValue = 0; int maxValue = 14;
-    int required = 3;
+
+int main(int argc, char** argv){
+    int size, required;
+    vector<vector<int>> data(1010, vector<int> (1010));
+
+
+    scanf("%d %d", &size, &required);
+    int minVal = inf, maxVal = 0;
+
+    for (int y = 0; y < size; ++y)
+    {
+        for (int x = 0; x < size; ++x)
+        {
+            scanf("%d", &data[y][x]);
+            minVal = std::min(minVal, data[y][x]);
+            maxVal = std::max(maxVal, data[y][x]);
+        }
+    }
+    Graph<pair<int, int>> graph1 = generateGraphFromLattice(size, data);
     cout << graph1;
 
-    int a = binary_search(minValue, maxValue, graph1, required);
-    cout << a;
+    int start = binary_search(minVal, maxVal, graph1, required);
 
-    return 0;
+    printf("%d\n", start);
 }

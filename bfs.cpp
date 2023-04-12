@@ -25,7 +25,7 @@ int bfs(T vertex, Graph<T> graph, int limit){
         ++ret;
 
         visited.insert(curr);
-        cout << "Visiting node:" << curr << endl;
+        //cout << "Visiting node:" << curr.first << curr.second << endl;
 
         //add all the nodes neighbours to the queue
         for (T elem: graph.getNeighbours(curr)){
