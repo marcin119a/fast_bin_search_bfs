@@ -1,7 +1,9 @@
+
 #ifndef BFS_H
 #define BFS_H
+#include "Graph.h"
 
-template<typename T>
-void bfs(T vertex, Graph<T> graph);
+template <class T>
+int bfs(T vertex, Graph<T> graph, int limit);
 
 #endif

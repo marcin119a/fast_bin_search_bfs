@@ -11,10 +11,12 @@ Graph<T>:: Graph(){
 
 // add vertex method
 template <class T>
-void Graph<T>:: addVertex(T val, set<T> edges){
+void Graph<T>:: addVertex(T val, set<T> edges, int value){
     //if the vertex is already created, the add the list of connections
     //to that vertex, otherwise create a new vertex and create a new set
     //of connections for the vertex
+    value_list.insert({val, value});
+
     typename map<T, set<T>>::iterator it = adj_list.find(val);
     if (it != adj_list.end()){
         it->second.insert(edges.begin(), edges.end());
@@ -42,13 +44,27 @@ set<T> Graph<T>:: getNeighbours(T vertex){
     return adj_list[vertex];
 }
 
+//get value for given vertex
+template <class T>
+int Graph<T>::getValue(T vertex){
+    return value_list[vertex];
+}
+
+//get visited status for given vertex
+template <class T>
+int Graph<T>::getVisited(T vertex){
+    return visited[vertex];
+}
+
+
+
 //override << operator. Display the adjacency list
 template <class T>
 inline ostream& operator<<(ostream& out, const Graph<T>& H){
     out << "{\n";
-    for (class map<T, set<T>>::const_iterator it = H.adj_list.begin(), end = H.adj_list.end(); it != end;++it){
+    for (typename map<T, set<T>>::const_iterator it = H.adj_list.begin(), end = H.adj_list.end(); it != end;++it){
         out << to_string(it->first) + " : ";
-        for (class set<T>::const_iterator lit = it->second.begin(), lend = it->second.end(); lit!= lend; ++lit){
+        for (typename set<T>::const_iterator lit = it->second.begin(), lend = it->second.end(); lit!= lend; ++lit){
             if (distance(next(lit), lend) == 0){
                 out << to_string(*lit);
             }
