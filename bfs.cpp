@@ -16,7 +16,7 @@ int bfs(T vertex, Graph<T> graph, int limit){
     //enqueue the vertex
     myQueue.push(vertex);
     //set the limit for vertex
-    graph.visited[vertex] = limit;
+    graph.setVisited(vertex,limit);
 
     //while there are still nodes to be visited
     while (!myQueue.empty()){
@@ -32,7 +32,7 @@ int bfs(T vertex, Graph<T> graph, int limit){
             typename set<T> :: iterator it = visited.find(elem);
 
             //if the neighbours of the current node have been visitted then dont add to queue
-            if (graph.visited[graph] != limit && graph.getValue(vertex) <= limit){
+            if (graph.getVisited(vertex) != limit && graph.getValue(vertex) <= limit){
                     if (it == visited.end()){
                         myQueue.push(elem);
                     }

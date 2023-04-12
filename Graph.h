@@ -22,6 +22,7 @@ public:
     set<T> getNeighbours(T vertex);
     int getValue(T vertex);
     int getVisited(T vertex);
+    void setVisited(T vertex, int value);
 };
 
 #endif

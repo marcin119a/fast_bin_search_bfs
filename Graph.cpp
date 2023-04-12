@@ -56,6 +56,11 @@ int Graph<T>::getVisited(T vertex){
     return visited[vertex];
 }
 
+//set visited status for given vertex
+template <class T>
+void Graph<T>::setVisited(T vertex, int value){
+    visited[vertex] = value;
+}
 
 
 //override << operator. Display the adjacency list

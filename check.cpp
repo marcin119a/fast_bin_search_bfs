@@ -11,7 +11,7 @@ bool check(int limit, Graph<T> graph, int required)
 
         if (graph.getVisited(it->first) != limit && graph.getValue(it->first) <= limit)
             {
-                found = std::max(found, bfs(it->first, limit));
+                found = std::max(found, bfs(it->first, graph, limit));
             }
 
     }
